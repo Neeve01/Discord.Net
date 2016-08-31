@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0-*",
+
+  "buildOptions": {
+    "compile": {
+      "include": [ "../Discord.Net.Entities/**.cs", "../Discord.Net.Utils/**.cs" ]
+    },
+    "define": [ "REST" ]
+  },
+
+  "dependencies": {
+    "Discord.Net.Core": {
+      "target": "project"
+    },
+    "NETStandard.Library": "1.6.0"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  }
+}
