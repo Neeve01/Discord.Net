@@ -54,7 +54,7 @@ namespace Discord.Net.Rest
 			    request.AddParameter("application/json", json, ParameterType.RequestBody);
 			return Send(request, cancelToken);
 		}
-		public Task<string> SendFile(string method, string path, string filename, Stream stream, CancellationToken cancelToken)
+		public Task<string> SendFile(string method, string message, string path, string filename, Stream stream, CancellationToken cancelToken)
 		{
 			var request = new RestRequest(path, GetMethod(method));
 			request.AddHeader("content-length", (stream.Length - stream.Position).ToString());
@@ -62,6 +62,12 @@ namespace Discord.Net.Rest
 			byte[] bytes = new byte[stream.Length - stream.Position];
 			stream.Read(bytes, 0, bytes.Length);
 			request.AddFileBytes("file", bytes, filename);
+
+            if (message != null)
+            {
+                request.AddParameter("content", message);
+                request.AddParameter("tts", false);
+            }
 			//request.AddFile("file", x => stream.CopyTo(x), filename); (Broken in latest ver)
 
 			return Send(request, cancelToken);

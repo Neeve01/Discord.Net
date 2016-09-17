@@ -15,6 +15,7 @@ namespace Discord.API
 
     public interface IRestFileRequest : IRestRequest
     {
+        string Content { get; }
         string Filename { get; }
         Stream Stream { get; }
     }

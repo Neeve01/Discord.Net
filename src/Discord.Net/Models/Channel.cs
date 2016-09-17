@@ -378,6 +378,24 @@ namespace Discord
             return msg;
         }
 
+        public async Task<Message> SendFile(string message, string filename, Stream stream)
+        {
+            if (filename == null) throw new ArgumentNullException(nameof(filename));
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
+
+            var request = new SendFileRequest(Id)
+            {
+                Filename = filename,
+                Stream = stream,
+                Content = message
+            };
+            var model = await Client.ClientAPI.Send(request).ConfigureAwait(false);
+
+            var msg = AddMessage(model.Id, IsPrivate ? Client.PrivateUser : Server.CurrentUser, model.Timestamp.Value);
+            msg.Update(model);
+            return msg;
+        }
+
         public Task SendIsTyping() => Client.ClientAPI.Send(new SendIsTypingRequest(Id));
         #endregion
 

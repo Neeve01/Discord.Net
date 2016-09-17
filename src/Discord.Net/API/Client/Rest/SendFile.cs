@@ -10,10 +10,12 @@ namespace Discord.API.Client.Rest
         string IRestRequest.Endpoint => $"channels/{ChannelId}/messages";
         object IRestRequest.Payload => null;
         string IRestFileRequest.Filename => Filename;
+        string IRestFileRequest.Content => Content;
         Stream IRestFileRequest.Stream => Stream;
 
         public ulong ChannelId { get; set; }
 
+        public string Content { get; set; }
         public string Filename { get; set; }
         public Stream Stream { get; set; }
 

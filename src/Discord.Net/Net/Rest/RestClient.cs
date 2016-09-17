@@ -126,7 +126,7 @@ namespace Discord.Net.Rest
 		private async Task<RestResults> SendFile(IRestFileRequest request, bool hasResponse)
 		{
 			Stopwatch stopwatch = Stopwatch.StartNew();			
-			string responseJson = await _engine.SendFile(request.Method, request.Endpoint, request.Filename, request.Stream, CancelToken).ConfigureAwait(false);
+			string responseJson = await _engine.SendFile(request.Method, request.Content, request.Endpoint, request.Filename, request.Stream, CancelToken).ConfigureAwait(false);
             stopwatch.Stop();
 
             double milliseconds = Math.Round((double)stopwatch.ElapsedTicks / (double)Stopwatch.Frequency * 1000.0, 2);
